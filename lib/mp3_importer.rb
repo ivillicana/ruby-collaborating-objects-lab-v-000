@@ -9,10 +9,11 @@ class MP3Importer
   end
 
   def files
-    Dir.glob("#{@path}/*").select {|x| File.file? x}.collect {|f| File.basename f}
+    @files = Dir.glob("#{@path}/*").select {|x| File.file? x}.collect {|f| File.basename f}
   end
 
   def import
-
+    self.files
+    @files.each {|file| Song.new_by_filename(file)}
   end
 end
